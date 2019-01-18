@@ -19,7 +19,7 @@ export default class AboutScreen extends React.Component {
   render() {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <Image
             source={require('../assets/images/aglogo.png')}
             style={styles.logoImage}
@@ -40,7 +40,7 @@ export default class AboutScreen extends React.Component {
             />
           </View>
           <Text style={styles.bodyText}>
-            Daniel is an acro enthusiast, world traveller, and software developer.
+            Daniel is an L-Basing and Standing acro enthusiast, a galavanting world traveller, and a nerdy software developer.
           </Text>
           <Text style={styles.headerText}>
             You can find him at:
@@ -53,16 +53,10 @@ export default class AboutScreen extends React.Component {
               <Text style={styles.linksText}>GitHub</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.bottomBarContainer}
-            title="See All Positions"
-            onPress={() => {
-              this.props.navigation.navigate('AllPositions');
-            }}
-          >
-            <Text style={styles.bottomBarText}>See All Positions</Text>
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
+        <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions Positions" onPress={() => {this.props.navigation.navigate('AllPositions');}}>
+          <Text style={styles.bottomBarText}>See All Positions</Text>
+        </TouchableOpacity>
       </ImageBackground>
     )
   }
@@ -83,13 +77,16 @@ const styles = StyleSheet.create({
     width: 330,
     height: 130,
     resizeMode: 'contain',
-    marginBottom: 25
+    marginBottom: 25,
   },
   container: {
-    flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'stretch',
     padding: 25,
+    paddingTop: 20,
+    paddingBottom: 80,
+    marginBottom: 70,
     // backgroundColor: Colors.lightPurple
   },
   contentContainer: {
