@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, WebBrowser, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
+import { Image, Linking, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { Icon } from 'expo';
 import _ from 'lodash';
 
@@ -15,6 +15,18 @@ export default class AboutScreen extends React.Component {
       borderBottomWidth: 0,
     },
   });
+
+
+  getMovies() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+         console.log("+++ 23 AboutScreen.js responseJson.movies: ", responseJson.movies);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   render() {
     return (
@@ -59,12 +71,11 @@ export default class AboutScreen extends React.Component {
     );
   }
 
-    goToLink = (link) => {
-    console.log("+++ 20 AboutScreen.js link: ", link)
-    WebBrowser.openBrowserAsync(link);
+  goToLink = (link) => {
+    Linking.openURL(link);
   };
-}
 
+} 
 const styles = StyleSheet.create({
 bg: {
     width: '100%', 
