@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   bottomBarText: {
-    marginBottom: 10,
     fontSize: 28,
     fontWeight: 'bold',
     color: Colors.lightBrown,

@@ -43,8 +43,8 @@ export default Position;
 
 const styles = StyleSheet.create({
   outerContainer: {
-    marginRight: 15,
-    marginLeft: 15,
+    marginRight: 30,
+    marginLeft: 30,
     marginBottom: 25
   },
   headerContainer: {
@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 19,
     color: Colors.white,
   },
   diff: {
     textTransform: 'capitalize',
-    fontSize: 12,
+    fontSize: 10,
     marginTop: 4,
     color: Colors.lightestBlue,
   },

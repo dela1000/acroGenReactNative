@@ -23,17 +23,19 @@ export default class SelectScreen extends React.Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <View style={styles.container}>
-          <Image
-              source={require('../assets/images/aglogo.png')}
+          <View style={styles.imageContainer}>
+            <Image
               style={styles.logoImage}
+              source={require('../assets/images/aglogo.png')}
             />
+          </View>
           <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
             <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
           </TouchableOpacity>
           <View style={styles.selectBoxes}>
             {Object.keys(this.state.diffs).map((key, index) => (
-              <TouchableOpacity style={[styles.selectButtons, styles.diffWidth]} key={index} onPress={this.diffSelector.bind(this, key)}>
-                <Text style={[styles.selectText, (this.state.diffs[key] ? styles.textActive : styles.textInactive)]}>
+              <TouchableOpacity style={[styles.selectButtons, styles.diffWidth, (this.state.diffs[key] ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.diffSelector.bind(this, key)}>
+                <Text style={[styles.selectText, (this.state.diffs[key] ? styles.activeText : styles.inactiveText)]}>
                   {key}
                 </Text>
               </TouchableOpacity>
@@ -41,8 +43,8 @@ export default class SelectScreen extends React.Component {
           </View>
           <View style={styles.selectBoxes}>
             {this.optionRange.map((index) =>
-              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth]} key={index} onPress={this.numberSelected.bind(this, index)}>
-                <Text style={[styles.selectText, (this.state.numberSelected === index ? styles.textActive : styles.textInactive)]}>
+              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
+                <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
                   {index}
                 </Text>
               </TouchableOpacity>
@@ -123,35 +125,30 @@ const styles = StyleSheet.create({
         elevation: 0,
       },
     }),
-    // backgroundColor: 'rgba(52, 52, 52, 0.8)',
     backgroundColor: Colors.lightestBlue,
     borderWidth: 0.5,
     borderColor: Colors.darkestBrown,
   },
   infoButton: { 
-    // color: 'white',
     color: Colors.lightPurple,
     marginLeft: 14,
     marginTop: 1,
   },
-  logoImage: {
-    justifyContent: 'center',
+  imageContainer: {
     alignItems: 'center',
+    marginHorizontal: 50,
+  },
+  logoImage: {
     width: 330,
-    height: 130,
+    height: 200,
     resizeMode: 'contain',
-    marginBottom: 25
   },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'stretch',
-    padding: 25,
-    // backgroundColor: Colors.lightPurple
-  },
-  contentContainer: {
-    paddingTop: 30,
+    padding: 20,
   },
   innerContainer: {
     alignItems: 'center',
@@ -160,7 +157,6 @@ const styles = StyleSheet.create({
   selectBoxes: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: Colors.lightPurple,
   },
   selectButtons: {
     alignSelf: 'auto',
@@ -184,12 +180,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'capitalize'
   },
-  textActive: {
-    color: Colors.darkestBrown,
+  inactiveButton: {
+    backgroundColor: Colors.lightestBrown,
+  },
+  activeText: {
     fontWeight: 'bold',
   },
-  textInactive: {
-    color: Colors.lightestBrown
+  inactiveText: {
+    color: Colors.lightBrown
   },
   bottomBarContainer: {
     position: 'absolute',
@@ -212,7 +210,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   bottomBarText: {
-    marginBottom: 10,
     fontSize: 28,
     fontWeight: 'bold',
     color: 'white',

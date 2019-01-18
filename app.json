@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "acroGenerator",
-    "slug": "acroGenerator",
+    "name": "AcroGenerator",
+    "slug": "AcroGenerator",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [

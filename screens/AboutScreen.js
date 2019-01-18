@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
+import { Image, WebBrowser, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
 import { Icon } from 'expo';
 import _ from 'lodash';
 
@@ -20,12 +20,8 @@ export default class AboutScreen extends React.Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <ScrollView style={styles.container}>
-          <Image
-            source={require('../assets/images/aglogo.png')}
-            style={styles.logoImage}
-          />
           <Text style={styles.headerText}>
-            How to use it:
+            How to use this app:
           </Text>
           <Text style={styles.bodyText}>
             Select a number of positions, the desired difficulty levels, and figure out how to connect them.
@@ -33,10 +29,10 @@ export default class AboutScreen extends React.Component {
           <Text style={styles.headerText}>
             About the Author:
           </Text>
-          <View style={styles.innerContainer}>
+          <View style={styles.imageContainer}>
             <Image
-              source={require('../assets/images/ddr.png')}
               style={styles.ddrImage}
+              source={require('../assets/images/ddr.png')}
             />
           </View>
           <Text style={styles.bodyText}>
@@ -54,47 +50,61 @@ export default class AboutScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions Positions" onPress={() => {this.props.navigation.navigate('AllPositions');}}>
+        <View style={flex=4}>
+        </View>
+        <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions" onPress={() => {this.props.navigation.navigate('AllPositions');}}>
           <Text style={styles.bottomBarText}>See All Positions</Text>
         </TouchableOpacity>
       </ImageBackground>
-    )
+    );
   }
 
-  goToLink = (link) => {
+    goToLink = (link) => {
+    console.log("+++ 20 AboutScreen.js link: ", link)
     WebBrowser.openBrowserAsync(link);
   };
 }
 
 const styles = StyleSheet.create({
-  bg: {
+bg: {
     width: '100%', 
     height: '100%'
   },
-  logoImage: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 330,
-    height: 130,
-    resizeMode: 'contain',
-    marginBottom: 25,
-  },
   container: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    padding: 25,
+    flex: 1,
     paddingTop: 20,
-    paddingBottom: 80,
-    marginBottom: 70,
-    // backgroundColor: Colors.lightPurple
+    paddingBottom: 180,
   },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  innerContainer: {
+  imageContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
+  },
+  ddrImage: {
+    width: 100,
+    height: 100,
+    margin: 10,
+
+  },
+  headerText: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+    marginBottom: 10,
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: Colors.lightestBlue
+  },
+  bodyText: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+    marginBottom: 20,
+    color: Colors.white
+  },
+  linksText: {
+    alignItems: 'center',
+    marginHorizontal: 50,
+    marginBottom: 5,
+    fontSize: 17,
+    color: Colors.lightBrown,
   },
   bottomBarContainer: {
     position: 'absolute',
@@ -117,41 +127,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   bottomBarText: {
-    marginBottom: 10,
     fontSize: 28,
     fontWeight: 'bold',
-    color: 'white',
     color: Colors.lightBrown,
     textAlign: 'center',
-  },
-  ddrImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    margin: 10,
-  },
-  headerText: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-    marginBottom: 10,
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: Colors.lightestBlue
-  },
-  bodyText: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-    marginBottom: 20,
-    color: Colors.white
-  },
-  linksText: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-    marginBottom: 5,
-    fontSize: 17,
-    color: Colors.lightBrown,
   },
 });
