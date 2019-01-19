@@ -38,16 +38,7 @@ export default class SelectScreen extends React.Component {
             ))}
           </View>
           <View style={styles.selectBoxes}>
-            {this.optionRange.slice(0, 5).map((index) =>
-              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
-                <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
-                  {index}
-                </Text>
-              </TouchableOpacity>
-            )}
-          </View>
-          <View style={styles.selectBoxes}>
-            {this.optionRange.slice(5).map((index) =>
+            {this.optionRange.map((index) =>
               <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
                 <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
                   {index}
