@@ -25,43 +25,43 @@ export default class EmailScreen extends Component {
 
   sendEmail = () => {
     
-  if(this.state.name === ''){
-    Alert.alert(
-      'Please enter a name',
-      '',
-      [{text: 'OK'}],
-    )
-    return;
-  }
-
-  if(this.state.email === ''){
-    Alert.alert(
-      'Please enter an email',
-      '',
-      [{text: 'OK'}],
-    )
-    return;
-  } else {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
-    if(reg.test(this.state.email) === false) {
-      console.log("Email is Not Correct");
+    if(this.state.name === ''){
       Alert.alert(
-        'Please enter a valid email',
+        'Please enter a name',
         '',
         [{text: 'OK'}],
       )
       return;
     }
-  }
 
-  if(this.state.message === ''){
-    Alert.alert(
-      'Please enter a message',
-      '',
-      [{text: 'OK'}],
-    )
-    return;
-  }
+    if(this.state.email === ''){
+      Alert.alert(
+        'Please enter an email',
+        '',
+        [{text: 'OK'}],
+      )
+      return;
+    } else {
+      let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+      if(reg.test(this.state.email) === false) {
+        console.log("Email is Not Correct");
+        Alert.alert(
+          'Please enter a valid email',
+          '',
+          [{text: 'OK'}],
+        )
+        return;
+      }
+    }
+
+    if(this.state.message === ''){
+      Alert.alert(
+        'Please enter a message',
+        '',
+        [{text: 'OK'}],
+      )
+      return;
+    }
 
     let data = JSON.stringify({
       name: this.state.name,
