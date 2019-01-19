@@ -7,6 +7,7 @@ import SelectScreen from '../screens/SelectScreen';
 import FlowScreen from '../screens/FlowScreen';
 import AboutScreen from '../screens/AboutScreen';
 import AllPositionsScreen from '../screens/AllPositionsScreen';
+import EmailScreen from '../screens/EmailScreen';
 
 const RootStack = createStackNavigator(
   {
@@ -14,6 +15,7 @@ const RootStack = createStackNavigator(
     Flow: FlowScreen,
     About: AboutScreen,
     AllPositions: AllPositionsScreen,
+    Email: EmailScreen
   },
   { initialRouteName: 'Select' }
 );

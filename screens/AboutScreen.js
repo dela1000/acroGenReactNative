@@ -3,7 +3,6 @@ import { Image, Linking, Platform, ScrollView, StyleSheet, Text, TouchableOpacit
 import { Icon } from 'expo';
 import _ from 'lodash';
 
-import { randomGen } from '../constants/helpers';
 import Colors from '../constants/Colors';
 import { emailLocation } from '../secrets/Secrets';
 
@@ -18,38 +17,10 @@ export default class AboutScreen extends React.Component {
   });
 
 
-  sendEmail() {
-    return fetch( emailLocation + '/email', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: "testNAME",
-        email: 'dela1000@gmail.com',
-        message: "Test message from app"
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-         console.log("+++ 23 AboutScreen.js responseJson.movies: ", responseJson.movies);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   render() {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <ScrollView style={styles.container}>
-          
-          <TouchableOpacity onPress={this.sendEmail}>
-              <Text style={styles.linksText}>Instagram - {emailLocation}</Text>
-            </TouchableOpacity>
-
-
           <Text style={styles.headerText}>
             How to use this app:
           </Text>
@@ -78,6 +49,9 @@ export default class AboutScreen extends React.Component {
             <TouchableOpacity onPress={this.goToLink.bind(this, "https://github.com/dela1000")}>
               <Text style={styles.linksText}>GitHub</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Email');}}>
+                <Text style={styles.linksText}>Contact</Text>
+              </TouchableOpacity>
           </View>
         </ScrollView>
         <View style={flex=4}>
@@ -95,7 +69,7 @@ export default class AboutScreen extends React.Component {
 
 } 
 const styles = StyleSheet.create({
-bg: {
+  bg: {
     width: '100%', 
     height: '100%'
   },
@@ -103,10 +77,10 @@ bg: {
     flex: 1,
     paddingTop: 20,
     paddingBottom: 180,
+    marginHorizontal: 50,
   },
   imageContainer: {
     alignItems: 'center',
-    marginHorizontal: 50,
   },
   ddrImage: {
     width: 100,
@@ -116,7 +90,6 @@ bg: {
   },
   headerText: {
     alignItems: 'center',
-    marginHorizontal: 50,
     marginBottom: 10,
     fontSize: 17,
     fontWeight: 'bold',
@@ -124,13 +97,11 @@ bg: {
   },
   bodyText: {
     alignItems: 'center',
-    marginHorizontal: 50,
     marginBottom: 20,
     color: Colors.white
   },
   linksText: {
     alignItems: 'center',
-    marginHorizontal: 50,
     marginBottom: 5,
     fontSize: 17,
     color: Colors.lightBrown,
