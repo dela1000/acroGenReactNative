@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import { randomGen } from '../constants/helpers';
 import Colors from '../constants/Colors';
+import { emailLocation } from '../secrets/Secrets';
 
 export default class AboutScreen extends React.Component {
   static navigationOptions = () => ({
@@ -17,8 +18,19 @@ export default class AboutScreen extends React.Component {
   });
 
 
-  getMovies() {
-    return fetch('https://facebook.github.io/react-native/movies.json')
+  sendEmail() {
+    return fetch( emailLocation + '/email', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: "testNAME",
+        email: 'dela1000@gmail.com',
+        message: "Test message from app"
+      }),
+    })
       .then((response) => response.json())
       .then((responseJson) => {
          console.log("+++ 23 AboutScreen.js responseJson.movies: ", responseJson.movies);
@@ -32,6 +44,12 @@ export default class AboutScreen extends React.Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <ScrollView style={styles.container}>
+          
+          <TouchableOpacity onPress={this.sendEmail}>
+              <Text style={styles.linksText}>Instagram - {emailLocation}</Text>
+            </TouchableOpacity>
+
+
           <Text style={styles.headerText}>
             How to use this app:
           </Text>

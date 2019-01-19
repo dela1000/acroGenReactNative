@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import { randomGen } from '../constants/helpers';
 import Colors from '../constants/Colors';
+import Logo from '../components/Logo';
 
 export default class SelectScreen extends React.Component {
   static navigationOptions = {
@@ -23,12 +24,7 @@ export default class SelectScreen extends React.Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <View style={styles.container}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.logoImage}
-              source={require('../assets/images/aglogo.png')}
-            />
-          </View>
+          <Logo />
           <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
             <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
           </TouchableOpacity>
@@ -42,7 +38,16 @@ export default class SelectScreen extends React.Component {
             ))}
           </View>
           <View style={styles.selectBoxes}>
-            {this.optionRange.map((index) =>
+            {this.optionRange.slice(0, 5).map((index) =>
+              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
+                <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
+                  {index}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+          <View style={styles.selectBoxes}>
+            {this.optionRange.slice(5).map((index) =>
               <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
                 <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
                   {index}
@@ -133,15 +138,6 @@ const styles = StyleSheet.create({
     color: Colors.lightPurple,
     marginLeft: 14,
     marginTop: 1,
-  },
-  imageContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  logoImage: {
-    width: 330,
-    height: 200,
-    resizeMode: 'contain',
   },
   container: {
     flex: 1,

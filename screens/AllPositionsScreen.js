@@ -44,13 +44,11 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   container: {
-    flex: 1,
     paddingTop: 10,
     paddingBottom: 80,
     marginBottom: 70,
   },
   bottomBarContainer: {
-    flex: 2,
     position: 'absolute',
     bottom: 0,
     left: 0,
