@@ -19,7 +19,7 @@ export default class EmailScreen extends Component {
     this.state = {
       name: '',
       email: '',
-      message: ''
+      message: '',
     };
   }
 
@@ -66,7 +66,8 @@ export default class EmailScreen extends Component {
     let data = JSON.stringify({
       name: this.state.name,
       email: this.state.email,
-      message: this.state.message
+      message: this.state.message,
+      source: 'acroGenApp'
     })
 
     fetch( emailLocation + '/email', {
@@ -78,11 +79,10 @@ export default class EmailScreen extends Component {
       body: data,
     })
       .then((responseJson) => {
-        console.log("+++ 41 EmailScreen.js responseJson.status: ", responseJson.status)
         if(responseJson.status === 200){
           Alert.alert(
-            'Thank you for the message. I will get back to you very soon.',
-            '',
+            'Thank you for the message.',
+            'I will get back to you very soon.',
             [{text: 'OK'}],
           )
           this.props.navigation.navigate('About')
@@ -96,7 +96,6 @@ export default class EmailScreen extends Component {
 
       })
       .catch((error) => {
-        console.log("+++ 99 EmailScreen.js error: ", error)
         Alert.alert(
           'Something went wrong. Sorry!',
           '',
