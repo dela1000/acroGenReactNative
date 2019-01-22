@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, ImageBackground, Alert } from 'react-native';
+import { AppRegistry, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, ImageBackground, Alert, KeyboardAvoidingView } from 'react-native';
 
 import Colors from '../constants/Colors';
 import { emailLocation } from '../secrets/Secrets';
@@ -108,28 +108,29 @@ export default class EmailScreen extends Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
         <ScrollView style={styles.container}>
-          <View style={{padding: 10}}>
-            <Text style={[styles.headerText, styles.marginTop]}>Enter your name:</Text>
-            <TextInput
-              style={[styles.textInput, styles.marginBottom]}
-              placeholder="Enter your name"
-              onChangeText={(name) => this.setState({name})}
-            />
-            <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
-            <TextInput
-              style={[styles.textInput, styles.marginBottom]}
-              placeholder="Enter your email"
-              onChangeText={(email) => this.setState({email})}
-            />
-            <Text style={[styles.headerText, styles.marginTop]}>Enter your message:</Text>
-            <TextInput
-              style={[styles.messageInput, styles.marginBottom]}
-              placeholder="Type your message"
-              multiline={true}
-              numberOfLines={4}
-              onChangeText={(message) => this.setState({message})}
-            />
-          </View>
+          <KeyboardAvoidingView style={{ flex: 1 }}
+            keyboardVerticalOffset={100} behavior={"position"}>
+              <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
+              <TextInput
+                style={[styles.textInput, styles.marginBottom]}
+                placeholder="Enter your email"
+                onChangeText={(email) => this.setState({email})}
+              />
+              <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
+              <TextInput
+                style={[styles.textInput, styles.marginBottom]}
+                placeholder="Enter your email"
+                onChangeText={(email) => this.setState({email})}
+              />
+              <Text style={[styles.headerText, styles.marginTop]}>Enter your message:</Text>
+              <TextInput
+                style={[styles.messageInput, styles.marginBottom]}
+                placeholder="Type your message"
+                multiline={true}
+                numberOfLines={4}
+                onChangeText={(message) => this.setState({message})}
+              />
+          </KeyboardAvoidingView>
         </ScrollView>
         <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions" onPress={this.sendEmail}>
           <Text style={styles.bottomBarText}>Send Email</Text>
