@@ -110,11 +110,11 @@ export default class EmailScreen extends Component {
         <ScrollView style={styles.container}>
           <KeyboardAvoidingView style={{ flex: 1 }}
             keyboardVerticalOffset={100} behavior={"position"}>
-              <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
+              <Text style={[styles.headerText, styles.marginTop]}>Enter your name:</Text>
               <TextInput
                 style={[styles.textInput, styles.marginBottom]}
-                placeholder="Enter your email"
-                onChangeText={(email) => this.setState({email})}
+                placeholder="Enter your name"
+                onChangeText={(name) => this.setState({name})}
               />
               <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
               <TextInput
@@ -130,18 +130,15 @@ export default class EmailScreen extends Component {
                 numberOfLines={4}
                 onChangeText={(message) => this.setState({message})}
               />
+              <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions" onPress={this.sendEmail}>
+                <Text style={styles.bottomBarText}>Send Email</Text>
+              </TouchableOpacity>
           </KeyboardAvoidingView>
         </ScrollView>
-        <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions" onPress={this.sendEmail}>
-          <Text style={styles.bottomBarText}>Send Email</Text>
-        </TouchableOpacity>
       </ImageBackground>
     );
   }
 }
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => EmailScreen);
 
 const styles = StyleSheet.create({
   bg: {

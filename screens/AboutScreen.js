@@ -50,7 +50,7 @@ export default class AboutScreen extends React.Component {
               <Text style={styles.linksText}>GitHub</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {this.props.navigation.navigate('Email');}}>
-                <Text style={styles.linksText}>Contact</Text>
+                <Text style={[styles.linksText, styles.marginTopMedium]}>Contact</Text>
               </TouchableOpacity>
           </View>
         </ScrollView>
@@ -132,4 +132,7 @@ const styles = StyleSheet.create({
     color: Colors.lightBrown,
     textAlign: 'center',
   },
+  marginTopMedium: {
+    marginTop: 10
+  }
 });
