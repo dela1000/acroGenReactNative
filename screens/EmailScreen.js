@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { AppRegistry, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, ImageBackground, Alert, KeyboardAvoidingView } from 'react-native';
+import { AppRegistry, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, ImageBackground, Alert, KeyboardAvoidingView, Dimensions } from 'react-native';
 
 import Colors from '../constants/Colors';
 import { emailLocation } from '../secrets/Secrets';
+
+import Position from '../components/Position';
+import { positionsList } from '../constants/acroPositions';
+
+const { height } = Dimensions.get('window')
 
 export default class EmailScreen extends Component {
   static navigationOptions = () => ({
@@ -20,7 +25,12 @@ export default class EmailScreen extends Component {
       name: '',
       email: '',
       message: '',
+      screenHeight: 0,
     };
+  }
+
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    this.setState({ screenHeight: contentHeight })
   }
 
   sendEmail = () => {
@@ -104,103 +114,107 @@ export default class EmailScreen extends Component {
       });
   }
 
-  render() {
-    return (
-      <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
-        <ScrollView style={styles.container}>
-          <KeyboardAvoidingView style={{ flex: 1 }}
-            keyboardVerticalOffset={100} behavior={"position"}>
-              <Text style={[styles.headerText, styles.marginTop]}>Enter your name:</Text>
-              <TextInput
-                style={[styles.textInput, styles.marginBottom]}
-                placeholder="Enter your name"
-                onChangeText={(name) => this.setState({name})}
-              />
-              <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
-              <TextInput
-                style={[styles.textInput, styles.marginBottom]}
-                placeholder="Enter your email"
-                onChangeText={(email) => this.setState({email})}
-              />
-              <Text style={[styles.headerText, styles.marginTop]}>Enter your message:</Text>
-              <TextInput
-                style={[styles.messageInput, styles.marginBottom]}
-                placeholder="Type your message"
-                multiline={true}
-                numberOfLines={4}
-                onChangeText={(message) => this.setState({message})}
-              />
-              <TouchableOpacity style={styles.bottomBarContainer} title="See All Positions" onPress={this.sendEmail}>
-                <Text style={styles.bottomBarText}>Send Email</Text>
-              </TouchableOpacity>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </ImageBackground>
-    );
-  }
-}
+    render() {
+      const { navigation } = this.props;
+      const randomIndexPositions = navigation.getParam('randomIndexPositions', 'Nothing selected');
+      const scrollEnabled = this.state. screenHeight > height;
 
-const styles = StyleSheet.create({
-  bg: {
-    width: '100%', 
-    height: '100%'
-  },
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    paddingBottom: 180,
-    marginHorizontal: 50,
-  },
-  imageContainer: {
-    alignItems: 'center',
-  },
-  headerText: {
-    alignItems: 'center',
-    marginBottom: 10,
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: Colors.lightestBlue
-  },
-  textInput: {
-    height: 40,
-    paddingLeft: 6,
-    backgroundColor: Colors.white
-  },
-  messageInput: {
-    height: 200,
-    paddingLeft: 6,
-    backgroundColor: Colors.white
-  },
-  marginTop: {
-    marginTop: 20
-  },
-  marginBottom: {
-    marginBottom: 5
-  },
-  bottomBarContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: Colors.lightGreen,
-    paddingVertical: 20,
-  },
-  bottomBarText: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: Colors.lightBrown,
-    textAlign: 'center',
-  },
-});
+      return (
+        <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
+          <ScrollView style={styles.container} scrollEnabled={scrollEnabled} onContentSizeChange={this.onContentSizeChange}>
+            <KeyboardAvoidingView keyboardVerticalOffset={10} behavior={"height"}>
+              <View>
+                <Text style={[styles.headerText, styles.marginTop]}>Enter your name:</Text>
+                <TextInput
+                  style={[styles.textInput, styles.marginBottom]}
+                  placeholder="Enter your name"
+                  onChangeText={(name) => this.setState({name})}
+                />
+                <Text style={[styles.headerText, styles.marginTop]}>Enter your email:</Text>
+                <TextInput
+                  style={[styles.textInput, styles.marginBottom]}
+                  placeholder="Enter your email"
+                  onChangeText={(email) => this.setState({email})}
+                />
+                <Text style={[styles.headerText, styles.marginTop]}>Enter your message:</Text>
+                <TextInput
+                  style={[styles.messageInput, styles.marginBottom]}
+                  placeholder="Type your message"
+                  multiline={true}
+                  numberOfLines={4}
+                  onChangeText={(message) => this.setState({message})}
+                />
+                <TouchableOpacity style={styles.bottomBarContainer} title="Go to About" onPress={() => {this.props.navigation.navigate('About');}}>
+                  <Text style={styles.bottomBarText}>Go to Select</Text>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </ImageBackground>
+      );
+    }
+  }
+
+  const styles = StyleSheet.create({
+    bg: {
+      width: '100%', 
+      height: '100%'
+    },
+    container: {
+      paddingTop: 10,
+      paddingBottom: 80,
+      marginLeft: 30,
+      marginRight: 30,
+      marginBottom: 30,
+    },
+    headerText: {
+      alignItems: 'center',
+      marginBottom: 10,
+      fontSize: 17,
+      fontWeight: 'bold',
+      color: Colors.lightestBlue
+    },
+    textInput: {
+      height: 40,
+      paddingLeft: 6,
+      backgroundColor: Colors.white
+    },
+    messageInput: {
+      height: 200,
+      paddingLeft: 6,
+      backgroundColor: Colors.white
+    },
+    marginTop: {
+      marginTop: 20
+    },
+    marginBottom: {
+      marginBottom: 5
+    },
+    bottomBarContainer: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      ...Platform.select({
+        ios: {
+          shadowColor: 'black',
+          shadowOffset: { height: -3 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3,
+        },
+        android: {
+          elevation: 20,
+        },
+      }),
+      alignItems: 'center',
+      backgroundColor: Colors.lightGreen,
+      paddingVertical: 20,
+    },
+    bottomBarText: {
+      marginBottom: 10,
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: Colors.lightBrown,
+      textAlign: 'center',
+    },
+  });

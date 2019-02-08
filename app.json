@@ -12,11 +12,15 @@
       "package": "com.acrogen.acrogen",
       "versionCode": 1,
       "permissions": [],
-      "icon": "./assets/images/icon.png",
+      "icon": "./assets/ag_launcher/res/mipmap-xxhdpi/ag_launcher.png",
+        "adaptiveIcon": {
+            "backgroundColor": "#be6600",
+            "foregroundImage": "./assets/ag_launcher/res/mipmap-xxhdpi/ag_launcher.png"
+          }
     },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/ag_launcher/res/mipmap-xxhdpi/ag_launcher.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -33,3 +37,4 @@
     }
   }
 }
+
