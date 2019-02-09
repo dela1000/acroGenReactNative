@@ -60,9 +60,8 @@ export default class SelectScreen extends React.Component {
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
         <View style={{width: "100%", height: 70, alignItems: 'flex-end'}} >
-
           <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
-            <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
+            <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-cog' : 'md-settings'} size={26} style={styles.infoButton} />
           </TouchableOpacity>
         </View>
         <View style={{flex: 1, width: "100%", justifyContent: 'center'}} >
@@ -88,7 +87,7 @@ export default class SelectScreen extends React.Component {
             )}
           </View>
         </View>
-        <View style={{width: "100%", height: 70, backgroundColor: 'steelblue'}} >
+        <View style={{width: "100%", height: 70 }} >
           <TouchableOpacity
             style={styles.bottomBarContainer}
             title="Go to Flow"
@@ -111,16 +110,10 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     top: 40,
-    right: 20,
-    borderRadius: 100,
-    backgroundColor: Colors.lightestBlue,
-    borderWidth: 0.5,
-    borderColor: Colors.darkestBrown,
+    right: 15,
   },
   infoButton: { 
-    color: Colors.lightPurple,
-    marginLeft: 14,
-    marginTop: 1,
+    color: "white",
   },
   container: {
     flex: 1,
