@@ -49,9 +49,9 @@ export default class AboutScreen extends React.Component {
             <TouchableOpacity onPress={this.goToLink.bind(this, "https://github.com/dela1000")}>
               <Text style={styles.linksText}>GitHub</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate('Email');}}>
-                <Text style={[styles.linksText, styles.marginTopMedium]}>Contact</Text>
-              </TouchableOpacity>
+            <TouchableOpacity onPress={this.goToLink.bind(this, "http://dela1000.com/#/contact")}>
+              <Text style={[styles.linksText, styles.marginTopMedium]}>Contact</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
         <View style={flex=4}>
