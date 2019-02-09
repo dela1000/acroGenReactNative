@@ -1,23 +1,26 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { AppLoading, Font } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-// import BottomTabNavigator from './navigation/BottomTabNavigator';
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false,
-  };
+    loaded: false,
+  }
+  // Load fonts here
+  loadFontsAsync = async () => {
+    await Font.loadAsync({pacifico: require('./assets/fonts/Pacifico-Regular.ttf')});
+    await Font.loadAsync({arimo: require('./assets/fonts/SpaceMono-Regular.ttf')});
+    this.setState({ loaded: true });
+  }
+
+  componentDidMount() {
+    this.loadFontsAsync();
+  }
 
   render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this.loadResourcesAsync}
-          onError={this.handleLoadingError}
-          onFinish={this.handleFinishLoading}
-        />
-      );
+    if (!this.state.loaded) {
+        return <AppLoading />;
     } else {
       return (
         <View style={styles.container}>
@@ -27,29 +30,6 @@ export default class App extends React.Component {
       );
     }
   }
-
-  loadResourcesAsync = async () => {
-    return Promise.all([
-      // Asset.loadAsync([
-      //   require('./assets/images/ddr.png'),
-      // ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
-    ]);
-  };
-
-  handleLoadingError = error => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
-    console.warn(error);
-  };
-
-  handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
-  };
 }
 
 const styles = StyleSheet.create({

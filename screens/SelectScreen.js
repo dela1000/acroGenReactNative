@@ -20,48 +20,6 @@ export default class SelectScreen extends React.Component {
 
   optionRange = _.range(2, 11);
 
-  render() {
-    return (
-      <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
-        <View style={styles.container}>
-          <Logo />
-          <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
-            <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
-          </TouchableOpacity>
-          <View style={styles.selectBoxes}>
-            {Object.keys(this.state.diffs).map((key, index) => (
-              <TouchableOpacity style={[styles.selectButtons, styles.diffWidth, (this.state.diffs[key] ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.diffSelector.bind(this, key)}>
-                <Text style={[styles.selectText, (this.state.diffs[key] ? styles.activeText : styles.inactiveText)]}>
-                  {key}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <View style={styles.selectBoxes}>
-            {this.optionRange.map((index) =>
-              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
-                <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
-                  {index}
-                </Text>
-              </TouchableOpacity>
-            )}
-          </View>
-          <TouchableOpacity
-            style={styles.bottomBarContainer}
-            title="Go to Flow"
-            onPress={() => {
-              this.props.navigation.navigate('Flow', {
-                randomIndexPositions: this.state.randomIndexPositions
-              });
-            }}
-          >
-            <Text style={styles.bottomBarText}>Go to Flow</Text>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    );
-  }
-
   numberSelected = (index) => {
     numberSelected = index;
     this.setState({ numberSelected })
@@ -95,6 +53,51 @@ export default class SelectScreen extends React.Component {
 
   componentDidMount() {
     this.createFlow(this.state.numberSelected, this.state.diffs)
+  }
+
+  render() {
+    return (
+      <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
+        <View style={{width: "100%", height: 50}} >
+          <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
+            <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 1, width: "100%", height: 50, justifyContent: 'center'}} >
+          <Logo />
+        </View>
+        <View style={{flex: 1, width: "100%", paddingRight: 20, paddingLeft: 20, justifyContent: 'center'}} >
+          <View style={styles.selectBoxes}>
+            {Object.keys(this.state.diffs).map((key, index) => (
+              <TouchableOpacity style={[styles.selectButtons, styles.diffWidth, (this.state.diffs[key] ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.diffSelector.bind(this, key)}>
+                <Text style={[styles.selectText, (this.state.diffs[key] ? styles.activeText : styles.inactiveText)]}>
+                  {key}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View style={styles.selectBoxes}>
+            {this.optionRange.map((index) =>
+              <TouchableOpacity style={[styles.selectButtons, styles.selectWidth, (this.state.numberSelected === index ? styles.activeButton : styles.inactiveButton)]} key={index} onPress={this.numberSelected.bind(this, index)}>
+                <Text style={[styles.selectText, (this.state.numberSelected === index  ? styles.activeText : styles.inactiveText)]}>
+                  {index}
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+        <View style={{width: "100%", height: 70, backgroundColor: 'steelblue'}} >
+          <TouchableOpacity
+            style={styles.bottomBarContainer}
+            title="Go to Flow"
+            onPress={() => { this.props.navigation.navigate('Flow', { randomIndexPositions: this.state.randomIndexPositions });}} >
+            <Text style={styles.bottomBarText}>Go to Flow</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      </ImageBackground>
+    );
   }
 }
 

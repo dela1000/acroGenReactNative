@@ -16,7 +16,6 @@ export default class AboutScreen extends React.Component {
     },
   });
 
-
   render() {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>

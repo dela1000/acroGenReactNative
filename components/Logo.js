@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import resolveAssetSource from "resolveAssetSource";
 import Colors from '../constants/Colors';
 
@@ -8,10 +8,8 @@ class Logo extends React.Component {
   render (){
     return (
       <View style={styles.imageContainer}>
-        <Image
-          style={styles.logoImage}
-          source={require('../assets/images/aglogo.png')}
-        />
+        <Text style = { styles.titleFont } >Acro</Text> 
+        <Text style = { styles.titleFont } >Generator</Text> 
       </View>
     )
   }
@@ -22,11 +20,15 @@ export default Logo;
 const styles = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
-    marginHorizontal: 50,
   },
-  logoImage: {
-    width: 330,
-    height: 200,
-    resizeMode: 'contain',
+  titleFont: {
+    position: 'absolute',
+    color: '#FFF',
+    textAlign: 'center',
+    fontSize: 60,
+    textShadowColor: 'black',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 1,
+    fontFamily: 'pacifico'
   },
 })
