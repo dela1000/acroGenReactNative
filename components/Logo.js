@@ -8,7 +8,7 @@ class Logo extends React.Component {
   render (){
     return (
       <View style={styles.imageContainer}>
-        <Text style = { styles.titleFont } >Acro</Text> 
+        <Text style = { [styles.titleFont, styles.acro] } >Acro</Text> 
         <Text style = { styles.titleFont } >Generator</Text> 
       </View>
     )
@@ -19,16 +19,21 @@ export default Logo;
 
 const styles = StyleSheet.create({
   imageContainer: {
-    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleFont: {
-    position: 'absolute',
-    color: '#FFF',
+    color: Colors.lightestBlue,
     textAlign: 'center',
-    fontSize: 60,
+    fontSize: 90,
     textShadowColor: 'black',
     textShadowOffset: {width: 2, height: 2},
     textShadowRadius: 1,
-    fontFamily: 'pacifico'
+    fontFamily: 'pacifico',
+    transform: [{ rotate: '359deg'}]
+
+  },
+  acro: {
+    top: 112,
+    right: 10
   },
 })

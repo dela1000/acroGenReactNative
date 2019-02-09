@@ -59,12 +59,13 @@ export default class SelectScreen extends React.Component {
     return (
       <ImageBackground source={require('../assets/images/purplebg.png')} style={styles.bg}>
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
-        <View style={{width: "100%", height: 50}} >
+        <View style={{width: "100%", height: 70, alignItems: 'flex-end'}} >
+
           <TouchableOpacity style={styles.infoContainer} title="Go to Info" onPress={() => {this.props.navigation.navigate('About')}}>
             <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} size={26} style={styles.infoButton} />
           </TouchableOpacity>
         </View>
-        <View style={{flex: 1, width: "100%", height: 50, justifyContent: 'center'}} >
+        <View style={{flex: 1, width: "100%", justifyContent: 'center'}} >
           <Logo />
         </View>
         <View style={{flex: 1, width: "100%", paddingRight: 20, paddingLeft: 20, justifyContent: 'center'}} >
@@ -107,23 +108,11 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   infoContainer: {
-    position: 'absolute',
     width: 30,
     height: 30,
-    top: 60,
+    top: 40,
     right: 20,
     borderRadius: 100,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 0,
-      },
-    }),
     backgroundColor: Colors.lightestBlue,
     borderWidth: 0.5,
     borderColor: Colors.darkestBrown,
